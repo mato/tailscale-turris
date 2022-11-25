@@ -1,0 +1,13 @@
+Package: tailscale
+Version: @@PKG_VERSION@@
+Depends: libc, tailscaled
+Source: feeds/packages/net/tailscale
+SourceName: tailscale
+License: BSD-3-Clause
+LicenseFiles: LICENSE
+Section: net
+SourceDateEpoch: 1666076686
+Maintainer: Martin Lucina <martin@lucina.net>
+Architecture: @@PKG_ARCH@@
+Installed-Size: @@PKG_INSTALLED_SIZE@@
+Description: Tailscale IPN client.
