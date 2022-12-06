@@ -16,7 +16,7 @@ all: $(PACKAGES)
 
 build/tailscale.tar.gz:
 	mkdir -p $(@D) $(@D)/upstream
-	curl -Ss $(UPSTREAM_DIST) --output $@
+	curl -Ssf $(UPSTREAM_DIST) --output $@
 	tar -C $(@D)/upstream --strip-components=1 -xzf $@
 
 build/upstream/tailscale build/upstream/tailscaled: | build/tailscale.tar.gz ;
