@@ -1,6 +1,6 @@
 
-UPSTREAM_DIST := https://pkgs.tailscale.com/stable/tailscale_1.34.0_arm.tgz
-PKG_VERSION := 1.34.0-1
+UPSTREAM_DIST := https://pkgs.tailscale.com/stable/tailscale_1.34.1_arm.tgz
+PKG_VERSION := 1.34.1-1
 PKG_ARCH := arm_cortex-a9_vfpv3-d16
 PKG_SUFFIX := $(PKG_VERSION)_$(PKG_ARCH)
 PACKAGES := build/tailscale_$(PKG_SUFFIX).ipk build/tailscaled_$(PKG_SUFFIX).ipk
