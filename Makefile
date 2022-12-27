@@ -65,3 +65,12 @@ clean:
 	$(RM) -r build
 
 .PHONY: clean
+
+PKG_FEED_DEST ?= /tmp/tailscale-turris
+# Installs built .ipk files to PKG_FEED_DEST and updates the feed metadata.
+update-feed: all
+	mkdir -p $(PKG_FEED_DEST)
+	cp $(PACKAGES) $(PKG_FEED_DEST)
+	scripts/update-feed.sh $(PKG_FEED_DEST)
+
+.PHONY: update-feed
