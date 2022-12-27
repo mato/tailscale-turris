@@ -52,3 +52,8 @@ from the CLI.
 
 NOTE: Package and feed signing/verification is not supported yet, use at your
 own risk.
+
+Feedback
+--------
+
+Discuss at https://forum.turris.cz/t/experimental-tailscale-packages-using-upstream-binaries/18276.
