@@ -18,7 +18,7 @@ repositories manually by browsing to https://pkgs-tailscale.lucina.net/.
 
 SSH into the router as root, and:
 
-1. Install [tailscale.lua](tailscale.lua) as `/etc/updater/conf.d/tailscale.lua`.
+1. Install [tailscale.lua](tailscale.lua?raw=1) as `/etc/updater/conf.d/tailscale.lua`.
 2. Run `pkgupdate` to install the packages. Update approvals are not required
    when running the updater from the command line.
 3. Enable and start the `tailscaled` service with `service tailscaled enable &&
