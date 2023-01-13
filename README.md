@@ -1,4 +1,5 @@
 # Tailscale packages for Turris OS
+![CI](https://github.com/mato/tailscale-turris/workflows/CI/badge.svg)
 
 Tailscale packages for Turris OS based on upstream precompiled [static
 binaries](https://pkgs.tailscale.com/stable/#static).
