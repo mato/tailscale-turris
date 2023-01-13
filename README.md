@@ -1,24 +1,34 @@
-This repository contains tooling to build packages of Tailscale suitable for
-use with Turris OS using the static binaries provided by upstream (Tailscale
-Inc.) at https://pkgs.tailscale.com/.
+# Tailscale packages for Turris OS
 
-Building the packages
----------------------
+Tailscale packages for Turris OS based on upstream precompiled [static
+binaries](https://pkgs.tailscale.com/stable/#static).
 
-Requirements:
-- GNU make
-- GNU tar
-- curl
+## Disclaimer
 
-To build. run `make`. This will produce packages of `tailscaled` and
-`tailscale` in `build/`.
+You use everything here at your own risk. Make sure you have other network
+paths to your router before installing this, in case something goes wrong.
 
-Installing on the Turris Omnia
-------------------------------
+Package signing and CA-based verification of the feed server is not yet
+implemented.
 
-1. Copy both packages to the router via SSH and install them with `opkg install`.
-2. Enable and start the `tailscaled` service with `service tailscaled enable && service tailscaled start`.
-3. Run `tailscale up [ OPTIONS ... ]` as you normally would.
+## Installation
+
+SSH into the router as root, and:
+
+1. Install [tailscale.lua](tailscale.lua) as `/etc/updater/conf.d/tailscale.lua`.
+2. Run `pkgupdate` to install the packages. Update approvals are not required
+   when running the updater from the command line.
+3. Enable and start the `tailscaled` service with `service tailscaled enable &&
+   service tailscaled start`.
+4. Run `tailscale up` as you normally would.
+
+If you have update approvals enabled, subsequent updates will need to be
+approved via the web interface.
+
+If you want to use the unstable release track instead, edit `tailscale.lua` to
+suit.
+
+## Upgrading
 
 These packages use the same filesystem conventions as those in upstream
 OpenWRT. Notably, `tailscaled.state` is located in `/etc/tailscale`. If you
@@ -29,31 +39,24 @@ network, be sure to copy  your existing `tailscaled.state` to `/etc/tailscale`.
 Upgrades from the OpenWRT upstream packages of Tailscale should work, but have
 not been tested.
 
-Automatic updates using a custom package feed
----------------------------------------------
+## Compatibility
 
-**Serving up a custom package feed**
+The package is created based on Tailscale [static
+binaries](https://pkgs.tailscale.com/stable/#static) which are confirmed to
+work on Turris OS 5.x or later.
 
-For this to work, you need a HTTPS-enabled static web server to host the custom
-package feed. The tools currently need to be run on the web server host.
+## Making packages
 
-Run `make update-feed PKG_FEED_DEST=/some/path` where _/some/path_ is the
-destination directory for your custom package feed. This will build the
-packages, copy them to the destination directory and update the feed metadata
-(`Packages`).
+Requirements:
+- GNU make
+- GNU tar
+- curl
+- jq
 
-**Configuring your router to use the custom package feed**
+To build packages of the latest upstream stable release run `make`. This will
+produce packages of `tailscaled` and `tailscale` in `build/stable/`.
 
-Install `tailscale.lua` to your router as `/etc/updater/conf.d/tailscale.lua`
-and follow the instructions in it.
-
-To test that updates are working as expected, run 'pkgupdate' on the router
-from the CLI.
-
-NOTE: Package and feed signing/verification is not supported yet, use at your
-own risk.
-
-Feedback
---------
-
-Discuss at https://forum.turris.cz/t/experimental-tailscale-packages-using-upstream-binaries/18276.
+Set `TRACK=unstable` on the `make` command line to build the latest unstable
+release instead, and/or `RELEASE=X.YY.Z` to build a specific release from the
+release track as set in `TRACK`.  Refer to the [Makefile](Makefile) for further
+targets, including those used to update package feeds.

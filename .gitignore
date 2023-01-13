@@ -1,1 +1,3 @@
 build/
+.upstream-stable-release
+.upstream-unstable-release
