@@ -9,8 +9,10 @@ binaries](https://pkgs.tailscale.com/stable/#static).
 You use everything here at your own risk. Make sure you have other network
 paths to your router before installing this, in case something goes wrong.
 
-Package signing and CA-based verification of the feed server is not yet
-implemented.
+Package signing and CA pinning of the feed server is not yet implemented.
+
+Package hosting provided by Martin Lucina (@mato on Github), you can view the
+repositories manually by browsing to https://pkgs-tailscale.lucina.net/.
 
 ## Installation
 

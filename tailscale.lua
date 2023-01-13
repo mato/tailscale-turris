@@ -1,14 +1,15 @@
 --[[
-Tailscale updates.
+Tailscale packages for Turris OS.
 
-Copy this file to your Turris Omnia as /etc/updater/conf.d/tailscale.lua, edit
-the URL to suit and uncomment the commands below.
+Based on the upstream precompiled static binaries at
+https://pkgs.tailscale.com/.
 
-To test that updates are working as expected, run 'pkgupdate' on the router
-from the CLI.
+Packaging-specific documentation can be found at
+https://github.com/mato/tailscale-turris/.
 
-Updater language reference: https://gitlab.nic.cz/turris/updater/updater/-/blob/master/docs/language.txt
+Package hosting provided by Martin Lucina (Github: @mato).
 ]]
 
---Repository("tailscale", "https://your-repo.example.com/", { ca = {}, crl = {}, ocsp = false})
---Install("tailscaled", "tailscale", { repository = {"tailscale"} })
+-- To use the unstable release track, replace /stable/ with /unstable/ below.
+Repository("tailscale", "https://pkgs-tailscale.lucina.net/stable/", { ca = {}, crl = {}, ocsp = false})
+Install("tailscaled", "tailscale", { repository = {"tailscale"} })

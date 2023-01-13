@@ -15,8 +15,8 @@
 # package feed metadata if a new release was published.
 #
 # Suggested cronjob for building and publishing updates:
-#     make -s TRACK=stable DESTDIR=/path/to/feeds/root update
-#     make -s TRACK=unstable DESTDIR=/path/to/feeds/root update
+#     make -s TRACK=stable DESTDIR=/path/to/feeds/stable update
+#     make -s TRACK=unstable DESTDIR=/path/to/feeds/unstable update
 #
 # clean: Cleans all built packages.
 #
