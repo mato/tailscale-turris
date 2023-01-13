@@ -2,9 +2,11 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches:
+      - master
   pull_request:
-    branches: [main]
+    branches:
+      - master
   create: # create branch or tag
   release:
     types:
@@ -15,8 +17,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Build packages
         run: |
           make TRACK=stable
           make TRACK=unstable
+      - name: Generate package feeds
+        run: |
+          make TRACK=stable update
+          make TRACK=unstable update
