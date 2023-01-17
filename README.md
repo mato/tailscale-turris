@@ -14,6 +14,11 @@ Package signing and CA pinning of the feed server is not yet implemented.
 Package hosting provided by Martin Lucina (@mato on Github), you can view the
 repositories manually by browsing to https://pkgs-tailscale.lucina.net/.
 
+## Issue Tracker
+
+File packaging issues in this repository. For all other issues with Tailscale
+on Turris OS please use the normal support channels.
+
 ## Installation
 
 SSH into the router as root, and:
@@ -63,3 +68,9 @@ Set `TRACK=unstable` on the `make` command line to build the latest unstable
 release instead, and/or `RELEASE=X.YY.Z` to build a specific release from the
 release track as set in `TRACK`.  Refer to the [Makefile](Makefile) for further
 targets, including those used to update package feeds.
+
+## Credits
+
+- Packaging based on the OpenWRT upstream
+  [package](https://github.com/openwrt/packages/tree/openwrt-21.02/net/tailscale)
+  by Ján Pavlinec of CZ.NIC.
