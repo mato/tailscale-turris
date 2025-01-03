@@ -36,13 +36,16 @@ DESTDIR ?= /tmp/tailscale-turris/$(TRACK)
 # in .upstream-$(TRACK)-release.
 RELEASE ?= $(file <.upstream-$(TRACK)-release)
 
+# Packaging revision, defaults to "1".
+REVISION ?= 1
+
 # -----------------------------------------------------------------------------
 
 DIST_BASE := tailscale_$(RELEASE)_arm
 DIST_TARBALL := $(DIST_BASE).tgz
 DIST_TARBALL_URL := https://pkgs.tailscale.com/$(TRACK)/$(DIST_TARBALL)
 
-PKG_VERSION := $(RELEASE)-1
+PKG_VERSION := $(RELEASE)-$(REVISION)
 PKG_ARCH := arm_cortex-a9_vfpv3-d16
 PKG_SUFFIX := $(PKG_VERSION)_$(PKG_ARCH)
 
