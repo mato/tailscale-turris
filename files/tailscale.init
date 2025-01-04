@@ -31,6 +31,10 @@ start_service() {
   procd_append_param command --state "$state_file"
 
   procd_set_param respawn
+  # Turris OS 7.1.0 or later use nftables for the firewall.
+  if opkg compare-versions "$(cat /etc/turris-version)" '>=' 7.1.0; then
+    procd_set_param env TS_DEBUG_FIREWALL_MODE=nftables
+  fi
   procd_set_param stdout "$std_out"
   procd_set_param stderr "$std_err"
 
