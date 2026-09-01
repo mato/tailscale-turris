@@ -41,7 +41,7 @@ FEED_DIR="$1"
 [ -d "${FEED_DIR}" ] || die "${FEED_DIR}: not a directory"
 
 cd "${FEED_DIR}"
-packages=*.ipk
+packages=$(find . -name \*.ipk -printf '%f\n' | sort -V)
 
 >Packages.new || die "could not create Packages.new"
 for ipk in ${packages}; do
