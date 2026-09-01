@@ -39,6 +39,15 @@ RELEASE ?= $(file <.upstream-$(TRACK)-release)
 # Packaging revision, defaults to "1".
 REVISION ?= 1
 
+# How many days worth of packages under $(DESTDIR) and intermediate files under
+# build/ to keep? Note while the disk usage grows pretty quickly, there's a
+# theoretical failure mode where it will delete even the latest release if one
+# is not published within that amount of days, so you don't want this set too
+# low.
+#
+# This is only run automatically as part of the update target.
+KEEP_DAYS=180
+
 # -----------------------------------------------------------------------------
 
 DIST_BASE := tailscale_$(RELEASE)_arm
@@ -142,14 +151,26 @@ distclean: clean
 
 .PHONY: distclean
 
+# Prune package and intermediate files older than $(KEEP_DAYS). Run
+# automatically as part of update below.
+prune:
+	find $(DESTDIR) -depth -mtime +$(KEEP_DAYS) -delete
+	find $(B) -depth -mtime +$(KEEP_DAYS) -delete
+
+.PHONY: prune
+
 # Shorthand for running periodically from e.g. cron; forces a refresh of
 # .upstream-*-release and only reinstalls packages if it changed.
+#
+# XXX scripts/update-feed.sh tries very hard to be atomic wrt to Packages, but
+# the combination of prune and install by definition isn't. Oh well. We can't
+# have everything.
 update:
 	if ! test -d $(DESTDIR); then \
 		$(MAKE) install; \
 	else \
 		$(RM) .upstream-$(TRACK)-release; \
-		$(MAKE) -q build || $(MAKE) install; \
+		$(MAKE) -q build || $(MAKE) prune install; \
 	fi
 
 .PHONY: update
